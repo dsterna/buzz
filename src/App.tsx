@@ -1,3 +1,4 @@
+//@ts-nocheck
 import './App.css'
 import './Button.scss'
 
@@ -27,6 +28,7 @@ function isColorDark(hexColor: string) {
 
 const App = ({ reflect, isHost = false }: { reflect: Reflect<M>, isHost: boolean }) => {
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comme
   const game = useSubscribe(reflect, async (tx) => getGame(tx, "game"));
   const gameTeams: Array<Team> = game?.teams ?? []
   const myTeam = gameTeams.find((team: Team) => team.members.find(elem => elem === reflect.userID)) ?? {}

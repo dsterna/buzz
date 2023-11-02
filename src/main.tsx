@@ -37,23 +37,12 @@ import { Host } from './Host';
  */
 
 
-const r = new Reflect({
-  userID: "someUser",
-  server: "http://localhost:8080",
-  mutators,
-});
-
 const Wrapper = () => {
-
-  const [hostObject, setHostObject] = useState({})
-  const [roomId, setRoomId] = useState(null)
 
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
         <Route path="/" element={<Root />} />
-        {/* <Route path="/game" element={<App reflect={newR} />} /> */}
-        <Route path="/gameForHost" element={<App />} />
         <Route path="/join/:code?" element={<Join />} />
         <Route path="/host" element={<Host />} />
       </>
@@ -69,8 +58,6 @@ const Wrapper = () => {
   )
 }
 ReactDOM.createRoot(document.getElementById('root')!).render(
-
   <Wrapper />
-
 )
 

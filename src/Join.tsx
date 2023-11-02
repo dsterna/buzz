@@ -18,12 +18,12 @@ export const Join = () => {
     const uuid = useStoredUuid();
 
     const [hasJoined, setHasJoined] = useState(false)
-    const [reflect, setReflect] = useState({})
+    const [reflect, setReflect] = useState<any>(null)
     const [notFound, setNotFound] = useState(false)
 
 
     const handleJoin = async () => {
-        const loadGame = async (r) => {
+        const loadGame = async (r: any) => {
             for (let index = 0; index <= 3; index++) {
                 setTimeout(async () => {
                     const game = await r.mutate.getGameFromCode("game")
@@ -52,7 +52,7 @@ export const Join = () => {
 
     return (
         <div>{
-            hasJoined ? <App reflect={reflect} /> :
+            hasJoined ? <App reflect={reflect} isHost={false} /> :
                 <>
                     <label htmlFor="joinCode">Kod:</label>
                     <br />

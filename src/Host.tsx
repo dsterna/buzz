@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Reflect } from "@rocicorp/reflect/client";
 import { mutators } from "../reflect/mutators.js";
 import App from "./App";
@@ -23,7 +23,7 @@ export const Host = () => {
         oneAnswerPerQuestion: true
     });
 
-    const [reflect, setReflect] = useState(null)
+    const [reflect, setReflect] = useState<any>(null)
     const [submitted, setSubmitted] = useState(false)
     const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -41,18 +41,19 @@ export const Host = () => {
 
 
 
-    const handleChange = (event: Event) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
     };
 
-    const handleCheckChange = (event: Event) => {
+    const handleCheckChange = (event: ChangeEvent<HTMLInputElement>) => {
+
         const { name, checked } = event.target;
         setFormData((prevFormData) => ({ ...prevFormData, [name]: checked }));
     };
 
 
-    const handleSubmit = (event: Event) => {
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (formData.hostCode) {
             const reflect = new Reflect({

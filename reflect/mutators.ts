@@ -34,7 +34,6 @@ export const mutators = {
   putQuestion,
   updateQuestion,
   listQuestions,
-  answerQuestion,
   deleteQuestion,
   putGame,
   getGame,
@@ -46,17 +45,7 @@ export const mutators = {
 
 export type M = typeof mutators;
 
-// async function increment(
-//   tx: WriteTransaction,
-//   { key, delta }: { key: string; delta: number }
-// ) {
-//   console.log(`incrementing ${key} by ${delta}`);
-//   const prev = await tx.get<number>(key);
-//   const next = (prev ?? 0) + delta;
-//   await tx.put(key, next);
-// }
-
-function randomInteger(min, max) {
+function randomInteger(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -109,23 +98,4 @@ async function createGame(
 
 async function getGameFromCode(tx: ReadTransaction, id: string) {
   return await getGame(tx, "game");
-}
-
-async function answerQuestion(
-  tx: WriteTransaction,
-  question: { id: string; name: string }
-) {
-  const alreadyAnswered: Question = await getQuestion(tx, question.id);
-
-  if (alreadyAnswered?.isAnswered === false) {
-    let newQuestion: Question = {
-      id: question.id,
-      isAnswered: true,
-      answeredBy: question.name,
-    };
-
-    await updateQuestion(tx, newQuestion);
-    // if (!alreadyAnswered) tx.put(key, { question, isAnswered, answeredBy });
-    // console.log(`tx ${tx}}`);
-  }
 }
