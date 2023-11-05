@@ -3,7 +3,8 @@ import './App.css'
 import './Button.scss'
 
 import { useSubscribe } from "@rocicorp/reflect/react";
-import { Slider, Sketch, Material, Colorful, Compact, Circle, Wheel, Block, Github, Chrome, ColorResult } from '@uiw/react-color';
+// import { Slider, Sketch, Material, Colorful, Compact, Circle, Wheel, Block, Github, Chrome, ColorResult } from '@uiw/react-color';
+import { Colorful, ColorResult } from '@uiw/react-color';
 import { Reflect } from '@rocicorp/reflect/client';
 import { M } from '../reflect/mutators';
 import { Game, getGame } from './Game';
