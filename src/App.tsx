@@ -14,6 +14,7 @@ import { Question } from './Question';
 /**
  * Refactor: Alla dessa variabler, typ hasNoTeam baseras ju på data och inte frontend, så det skulle kunna ligga någon annan stans
  * 
+ * published at https://refle-dsterna.reflect-server.net/
  */
 function isColorDark(hexColor: string) {
   if (!hexColor) return

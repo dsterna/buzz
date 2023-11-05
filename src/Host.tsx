@@ -59,7 +59,7 @@ export const Host = () => {
             const reflect = new Reflect({
                 roomID: formData.hostCode,
                 userID: "host",
-                server: "http://localhost:8080",
+                server: "https://refle-dsterna.reflect-server.net/",
                 mutators,
             })
             setReflect(reflect)
