@@ -7,7 +7,7 @@ import { Reflect } from "@rocicorp/reflect/client";
 import { mutators } from "../reflect/mutators.js";
 
 import {
-  createBrowserRouter,
+  createHashRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
@@ -19,27 +19,9 @@ import { Host } from './Host';
 
 
 
-
-
-
-
-/**
- * Nästa steg blir att 
- *  kunna hosta rum (skit i options förutom antal frågor)
- * Kunna jona rum
- * host kunna bläddra mellan frågor 
- * 
- * nästa steg
- * lag 
- * 
- * 
- * Timer
- */
-
-
 const Wrapper = () => {
 
-  const router = createBrowserRouter(
+  const router = createHashRouter(
     createRoutesFromElements(
       <>
         <Route path="/" element={<Root />} />
