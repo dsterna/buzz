@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
 import './index.css'
 
-import { Reflect } from "@rocicorp/reflect/client";
-import { mutators } from "../reflect/mutators.js";
-
 import {
-  createBrowserRouter,
+  createHashRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
@@ -17,10 +12,14 @@ import { Join } from './Join';
 import { Root } from './Root';
 import { Host } from './Host';
 
+/**
+ * Nästa steg blir att 
+ * Timer
+ */
 
 const Wrapper = () => {
 
-  const router = createBrowserRouter(
+  const router = createHashRouter(
     createRoutesFromElements(
       <>
         <Route path="/" element={<Root />} />

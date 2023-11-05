@@ -107,7 +107,7 @@ export const Host = () => {
                 contentLabel="Example Modal"
                 style={customStyles}
             >
-                <QRCode value={`http://localhost:3000/join/${formData.hostCode}`} />
+                <QRCode value={`https://dsterna.github.io/buzz/#/join/${formData.hostCode}`} />
 
 
             </Modal >
