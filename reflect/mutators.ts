@@ -18,29 +18,18 @@
 
 import type { WriteTransaction, ReadTransaction } from "@rocicorp/reflect";
 import { colors } from "../src/colors";
-import {
-  Question,
-  putQuestion,
-  updateQuestion,
-  listQuestions,
-  deleteQuestion,
-  getQuestion,
-} from "../src/Question";
+import { Question } from "../src/Question";
 
 import { Game, putGame, getGame, updateGame, listGames } from "../src/Game";
 import { Team } from "../src/Team";
 
 export const mutators = {
-  putQuestion,
-  updateQuestion,
-  listQuestions,
-  deleteQuestion,
-  putGame,
   getGame,
   updateGame,
   listGames,
   createGame,
   getGameFromCode,
+  handleAnswer,
 };
 
 export type M = typeof mutators;
@@ -98,4 +87,25 @@ async function createGame(
 
 async function getGameFromCode(tx: ReadTransaction, id: string) {
   return await getGame(tx, "game");
+}
+
+async function handleAnswer(tx: ReadTransaction, answeringTeam: number) {
+  const game = await getGame(tx, "game");
+  const currentQuestion = game?.questions[game?.currentQuestionIndex];
+  if (currentQuestion?.beingAnswered) return;
+  else {
+    const newQuestions =
+      game?.questions.map((elem, index) =>
+        game?.currentQuestionIndex === index
+          ? {
+              ...elem,
+              beingAnswered: true,
+              beingAnsweredByTeamIndex: answeringTeam,
+            }
+          : elem
+      ) ?? [];
+
+    const newGame: any = { ...game, questions: newQuestions };
+    await updateGame(tx, newGame);
+  }
 }

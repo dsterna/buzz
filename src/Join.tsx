@@ -42,6 +42,7 @@ export const Join = () => {
             const r = new Reflect({
                 roomID: inputCode,
                 userID: uuid,
+                // server: "http://127.0.0.1:8080/",
                 server: "https://refle-dsterna.reflect-server.net/",
                 mutators,
             })

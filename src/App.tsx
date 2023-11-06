@@ -48,15 +48,10 @@ const GameLoop = ({ reflect, game, myTeam }) => {
    * Antal frågor behövs inte, man fortsätter så länge man trycker på nästa
    */
 
-  const handleAnswer = () => {
-    const currentQuestion = { ...game?.questions[game?.currentQuestionIndex] }
-    currentQuestion.beingAnswered = true
-    currentQuestion.beingAnsweredByTeamIndex = parseInt(myTeam.id)
+  const handleAnswer = async () => {
 
-    const newQuestions = game.questions.map((elem, index) =>
-      game?.currentQuestionIndex === index ? currentQuestion : elem
-    )
-    reflect.mutate.updateGame({ ...game, id: "game", questions: newQuestions })
+    reflect.mutate.handleAnswer(parseInt(myTeam.id))
+
   }
 
   const opponents = []
@@ -268,7 +263,6 @@ const HostControls = ({ reflect, game }) => {
           </>} */}
         </div>
         <div>
-
           <label htmlFor="questionScore"> Ger antal poäng</label>
           <input type="number" id="questionScore" onChange={handleScoreChange} value={currentQuestion.score} />
         </div>
@@ -278,13 +272,10 @@ const HostControls = ({ reflect, game }) => {
           <br />
           <b>Nu svarar:
             <br />
-
             {game.teams[currentQuestion.beingAnsweredByTeamIndex].teamName}</b>
           <button style={{ backgroundColor: "green" }} onClick={onCorrectAnswer}>Rätt svar</button>
           <button style={{ backgroundColor: "red" }} onClick={onWrongAnswer}>Fel svar</button>
-
         </>
-
         }
         <br />
       </>}
