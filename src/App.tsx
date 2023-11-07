@@ -49,7 +49,7 @@ const GameLoop = ({ reflect, game, myTeam }) => {
    */
 
   const handleAnswer = async () => {
-
+    // const mills = Date.now()
     reflect.mutate.handleAnswer(parseInt(myTeam.id))
 
   }
@@ -100,8 +100,17 @@ const GameLoop = ({ reflect, game, myTeam }) => {
         Fråga {currentQuestion.id}
       </div>
 
+
+      {currentQuestion.beingAnswered && <>
+        <br />
+        <b>
+          <i>
+            {game?.teams[currentQuestion.beingAnsweredByTeamIndex]?.teamName}
+          </i> </b> svarar
+
+      </>}
       <br />
-      {currentQuestion.isAnswered ? <>Besvarad av {game?.teams[currentQuestion.answeredByTeamIndex]?.teamName}</> : hasTeam && <Button currentQuestion={currentQuestion} myTeam={myTeam} handleAnswer={handleAnswer} />}
+      {currentQuestion.isAnswered ? <>Besvarad av <i> {game?.teams[currentQuestion.answeredByTeamIndex]?.teamName}</i></> : hasTeam && <Button currentQuestion={currentQuestion} myTeam={myTeam} handleAnswer={handleAnswer} />}
     </div>
   )
 }
@@ -113,12 +122,12 @@ function adjust(color, amount) {
 
 function getGradient(color) {
   return `
-  linear-gradient(
-    to left,
-    ${adjust(color, -30)} 0%,
-    ${adjust(color, -40)} 8%,
-    ${adjust(color, -60)} 92%,
-    ${adjust(color, -90)} 100%)`
+      linear-gradient(
+      to left,
+      ${adjust(color, -30)} 0%,
+      ${adjust(color, -40)} 8%,
+      ${adjust(color, -60)} 92%,
+      ${adjust(color, -90)} 100%)`
 }
 
 const Button = ({
@@ -180,6 +189,10 @@ const Sonar = ({ beingAnswered, myColor, beingAnsweredByMyTeam, activeQuestion }
 }
 const HostControls = ({ reflect, game }) => {
   const [questionTimed, setQuestionTimed] = useState(false)
+
+
+
+
   const questionActive = game?.questions[game.currentQuestionIndex].active
 
   const startGame = () => {
@@ -189,6 +202,7 @@ const HostControls = ({ reflect, game }) => {
     reflect.mutate.updateGame({ ...game, id: "game", gameStarted: false })
   }
   const toggleActive = () => {
+
     const newQ = {
       ...currentQuestion, active: !questionActive,
       beingAnswered: false,
